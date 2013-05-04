@@ -9,10 +9,10 @@ class LocalPoint < ActiveRecord::Base
     slng = params[:slng]
 
     return self.where(
-      ["latitude  <= ?",
-       "latitude  >= ?",
-       "longitude <= ?",
-       "longitude >= ?"].join(' and '),
+      ["latitude  >= ?",
+       "latitude  <= ?",
+       "longitude >= ?",
+       "longitude <= ?"].join(' and '),
       nlat, slat, nlng, slng)
   end
 end

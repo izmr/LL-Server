@@ -1,0 +1,35 @@
+$ ->
+  lat = 35.6589960
+  lng = 139.70380
+  create_gmap('#map_canvas', lat, lng)
+  fetch_points(lat-0.01, lat+0.01, lng-0.01, lng+0.01)
+
+fetch_points=(nlat,slat,nlng,slng) ->
+  $.ajax({
+    type:     "GET",
+    dataType: "json",
+    url:      "/api/points",
+    data:     { nlat:nlat, slat:slat, nlng:nlng, slng:slng },
+    success: (data, status, jqXHR) ->
+      for point, num in data
+        add_marker(point.latitude, point.longitude, point.point_name)
+  })
+
+create_gmap=(id,lat,lng) ->
+  latlng = new google.maps.LatLng(lat,lng)
+  opts   = {
+    zoom:      15,
+    center:    latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  window.gmap = new google.maps.Map($(id)[0], opts)
+
+add_marker=(lat,lng,title) ->
+  latlng = new google.maps.LatLng(lat, lng)
+  marker = new google.maps.Marker(
+    {
+      position: latlng,
+      title:    title
+    }
+  )
+  marker.setMap(window.gmap)
