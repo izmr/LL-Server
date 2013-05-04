@@ -5,7 +5,6 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
-gem 'gmaps4rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
