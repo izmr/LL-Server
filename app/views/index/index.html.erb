@@ -1,5 +1,8 @@
-<h1>Index#Index</h1>
 <%= google_map_tag id: "map_canvas", width: 500, height: 500 %>
+
+<%= form_tag('/search', :method => :get) do %>
+
+<% end %>
 
 </div>
 <% @local_points.each do |point| %>
