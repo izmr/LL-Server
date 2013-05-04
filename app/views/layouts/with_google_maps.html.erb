@@ -26,15 +26,8 @@
     <%= render 'layouts/navigation' %>
 
     <div class="container">
-      <div class="row-fluid">
-        <div class="span10">
-          <%= bootstrap_flash %>
-          <%= yield %>
-        </div>
-      </div><!--/row-->
-
-    <%= render 'layouts/footer' %>
-
+      <%= yield %>
+      <%= render 'layouts/footer' %>
     </div> <!-- /container -->
 
     <!-- Javascripts

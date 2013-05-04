@@ -1,10 +1,17 @@
-<%= google_map_tag id: "map_canvas", width: 500, height: 500 %>
+<div class="row-fluid">
+  <div class="span10">
+    <%= bootstrap_flash %>
 
-<%= form_tag('/search', :method => :get) do %>
+    <%= google_map_tag id: "map_canvas", width: 500, height: 500 %>
 
-<% end %>
+    <%= form_tag('/search', :method => :get) do %>
 
-</div>
-<% @local_points.each do |point| %>
-  <p><%= point.point_name %></p>
-<% end %>
+    <% end %>
+
+    </div>
+    <% @local_points.each do |point| %>
+      <p><%= point.point_name %></p>
+    <% end %>
+
+  </div>
+</div><!--/row-->
