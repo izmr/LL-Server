@@ -17,10 +17,17 @@ class LocalPointController < ApplicationController
     @local_point = LocalPoint.find(@params[:id])
   end
 
+  # GET /local_point/1/edit
   def edit
+    @local_point = LocalPoint.find(@params[:id])
   end
+
+  # PUT /local_point/1
   def update
+    @local_point = LocalPoint.find(@params[:id])
   end
+
+  # DELETE /local_point/1
   def destroy
   end
 end

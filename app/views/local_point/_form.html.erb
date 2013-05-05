@@ -1,4 +1,4 @@
-<%= form_tag '/local_point', :method => :post, :class => 'form-horizontal' do %>
+<%= form_for :local_point, :html => {:class => 'form-horizontal'} do %>
   <fieldset>
     <legend>セッションスポットを紹介する</legend>
     <div class="control-group">
@@ -41,7 +41,7 @@
     </div>
     <div class="control-group">
       <div class="controls">
-        <button type="submit" class="btn">追加</button>
+        <button type="submit" class="btn btn-success">Update</button>
       </div>
     </div>
   </fieldset>

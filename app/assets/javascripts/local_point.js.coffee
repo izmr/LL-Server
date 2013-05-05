@@ -4,7 +4,7 @@ $ ->
     canvasId: canvasId,
     lat:      35.68172719326397,
     lng:      139.76800135498047,
-    level:    14,
+    level:    15,
     range:    0.01,
     form:     {
       latf:    '#latitude',
