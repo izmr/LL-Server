@@ -1,0 +1,13 @@
+<div class="row-fluid">
+  <%= bootstrap_flash %>
+  <div class="span6">
+    <%= google_map_tag id: "map_canvas", width: 550, height: 550 %>
+  </div>
+  <div class="span6">
+    <%= render 'form' %>
+  </div>
+</div><!--/row-->
+
+<% content_for :javascript do %>
+<%= javascript_include_tag "local_point" %>
+<% end %>

@@ -1,9 +1,8 @@
 Ll::Application.routes.draw do
-root :to => 'index#index'
 match 'api/points' => 'api#points'
 match 'about' => 'about#index'
-resources :local_points do
-end
+resources :local_points
+root :to => 'local_points#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

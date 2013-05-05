@@ -1,0 +1,17 @@
+<div class="row-fluid">
+  <div class="span7">
+    <%= bootstrap_flash %>
+
+    <%= google_map_tag id: "map_canvas", width: 600, height: 600 %>
+
+  </div>
+  <div class="span4">
+    <div class="accordion" id="local_points_info">
+
+    </div>
+  </div>
+</div><!--/row-->
+
+<% content_for :javascript do %>
+<%= javascript_include_tag "index" %>
+<% end %>

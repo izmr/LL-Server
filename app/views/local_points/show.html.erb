@@ -4,7 +4,6 @@
     <%= google_map_tag id: "map_canvas", width: 550, height: 550 %>
   </div>
   <div class="span6">
-    <p id="notice"><%= notice %></p>
     <table class="table">
       <tr>
         <th>店名</th>
@@ -21,6 +20,12 @@
       <tr>
         <th>簡単な説明</th>
         <td><%= @local_point.description %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <%= link_to sanitize('<i class="icon-trash icon-white"></i> ') + 'Destroy', @local_point, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+        </td>
       </tr>
     </table>
   </div>

@@ -1,5 +1,5 @@
 class LocalPointsController < ApplicationController
-  # GET /local_point
+  # GET /local_points
   def index
   end
 
@@ -14,7 +14,7 @@ class LocalPointsController < ApplicationController
 
     respond_to do |format|
       if @local_point.save
-        format.html { redirect_to @local_point, notice: 'Item was successfully created.' }
+        format.html { redirect_to @local_point }
       else
         format.html { render action: "new" }
       end
@@ -34,9 +34,23 @@ class LocalPointsController < ApplicationController
   # PUT /local_point/1
   def update
     @local_point = LocalPoint.find(params[:id])
+
+    respond_to do |format|
+      if @local_point.update_attributes(params[:local_point])
+        format.html { redirect_to @local_point }
+      else
+        format.html { render action: "new" }
+      end
+    end
   end
 
   # DELETE /local_point/1
   def destroy
+    @local_point = LocalPoint.find(params[:id])
+    @local_point.destroy
+
+    respond_to do |format|
+      format.html { redirect_to local_points_url }
+    end
   end
 end
