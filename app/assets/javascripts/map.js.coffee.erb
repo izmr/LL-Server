@@ -6,6 +6,13 @@ class @MyMaps
     @lng      = @params.lng
     @level    = @params.level || 15
     @range    = @params.range || 0.01
+    @map      = {}
+
+  reloadCenter: () ->
+    _this = @
+    google.maps.event.addListener @map, 'center_changed', ->
+      _this.removeCenterMarker()
+      _this.addCenterMarker()
 
   # 一点の位置の周辺情報を取得
   fetchPointsAround:() ->
@@ -43,18 +50,23 @@ class @MyMaps
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     window.gmap = new google.maps.Map($(@canvasId)[0], opts)
+    @map = window.gmap
+
+  removeCenterMarker:() ->
+    @centerMarker.setMap(null)
 
   # mapの中央にマーカーを配置
   addCenterMarker:() ->
     center    = window.gmap.getCenter()
     imageUrl  = 'http://www.google.com/mapfiles/gadget/arrowSmall80.png'
     image     = new google.maps.MarkerImage imageUrl
-    @addMarker({
+    marker = @addMarker({
       lat:   center.lat(),
       lng:   center.lng(),
       title: 'center',
       icon:  image,
     })
+    @centerMarker = marker
 
   # GoogleMapsにマーカーを配置
   addMarker:(opt) ->
@@ -65,6 +77,7 @@ class @MyMaps
       icon:     opt.icon,
     })
     marker.setMap(window.gmap)
+    return marker
 
   # 右側スペースにpointの情報を表示
   showLocalPointsInfo:(data, opt={}) ->
