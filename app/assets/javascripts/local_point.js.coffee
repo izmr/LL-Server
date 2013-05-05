@@ -7,9 +7,9 @@ $ ->
     level:    15,
     range:    0.01,
     form:     {
-      latf:    '#latitude',
-      lngf:    '#longitude',
-      address: '#address',
+      latf:    '#local_point_latitude',
+      lngf:    '#local_point_longitude',
+      address: '#local_point_address',
     }
   })
   myMaps.createGmap()
@@ -19,7 +19,5 @@ $ ->
   myMaps.reloadCenter()
 
   # ジオコーディング
-  $("#update_center_by_name").bind "click", ->
-    myMaps.updateCenterByAddress $("#point_name").val()
   $("#update_center_by_address").bind "click", ->
-    myMaps.updateCenterByAddress $("#address").val()
+    myMaps.updateCenterByAddress $(myMaps.form.address).val()

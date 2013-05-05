@@ -1,4 +1,4 @@
-class LocalPointController < ApplicationController
+class LocalPointsController < ApplicationController
   # GET /local_point
   def index
   end
@@ -10,6 +10,15 @@ class LocalPointController < ApplicationController
 
   # POST /local_point
   def create
+    @local_point = LocalPoint.new(params[:local_point])
+
+    respond_to do |format|
+      if @local_point.save
+        format.html { redirect_to @local_point, notice: 'Item was successfully created.' }
+      else
+        format.html { render action: "new" }
+      end
+    end
   end
 
   # GET /local_point/1

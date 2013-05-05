@@ -1,5 +1,5 @@
 class LocalPoint < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :point_name, :address, :latitude, :longitude, :description, :site_url
 
   # 指定した緯度経度の範囲内にあるpointを取得
   def self.find_by_latlng(params)
