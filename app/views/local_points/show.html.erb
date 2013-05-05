@@ -24,7 +24,8 @@
       <tr>
         <td></td>
         <td>
-          <%= link_to sanitize('<i class="icon-trash icon-white"></i> ') + 'Destroy', @local_point, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+          <%= link_to sanitize('<i class="icon-upload icon-white"></i> ') + '更新', edit_local_point_path(@local_point), class: 'btn btn-success' %>
+          <%= link_to sanitize('<i class="icon-trash icon-white"></i> ') + '削除', @local_point, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
         </td>
       </tr>
     </table>

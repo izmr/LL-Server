@@ -9,5 +9,29 @@
 </div><!--/row-->
 
 <% content_for :javascript do %>
-<%= javascript_include_tag "local_point" %>
+<script type="text/javascript">
+  $(function(){
+    var canvasId = '#map_canvas';
+    var myMaps = new MyMaps({
+      canvasId: canvasId,
+      lat:      <%= @local_point.latitude ||  35.68172719326397 %>,
+      lng:      <%= @local_point.longitude || 139.76800135498047 %>,
+      level:    16,
+      range:    0.01,
+      form:     {
+        latf:    '#local_point_latitude',
+        lngf:    '#local_point_longitude',
+        address: '#local_point_address',
+      }
+    });
+    myMaps.createGmap();
+
+    myMaps.addCenterMarker();
+    myMaps.reloadCenter();
+
+    $("#update_center_by_address").bind("click", function () {
+      myMaps.updateCenterByAddress($(myMaps.form.address).val());
+    });
+  });
+</script>
 <% end %>
