@@ -13,6 +13,6 @@ class LocalPoint < ActiveRecord::Base
        "latitude  <= ?",
        "longitude >= ?",
        "longitude <= ?"].join(' and '),
-      nlat, slat, nlng, slng)
+      nlat, slat, nlng, slng).order('updated_at desc').limit(100)
   end
 end
