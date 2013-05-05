@@ -1,0 +1,94 @@
+# ロード完了後、GoogleMaps生成とマーカー配置
+class @MyMaps
+  constructor: (@params) ->
+    @canvasId = @params.canvasId
+    @lat      = @params.lat
+    @lng      = @params.lng
+    @level    = @params.level || 15
+    @range    = @params.range || 0.01
+
+  # 一点の位置の周辺情報を取得
+  fetchPointsAround:() ->
+    @fetchPoints({
+      nlat: @lat - @range,
+      slat: @lat + @range,
+      nlng: @lng - @range,
+      slng: @lng + @range,
+    })
+
+  # 指定した範囲の緯度経度からpoint情報取得を試みる
+  fetchPoints:(latlng) ->
+    _this = @
+    $.ajax({
+      type:     "GET",
+      dataType: "json",
+      url:      "/api/points",
+      data:     latlng,
+      success: (data, status, jqXHR) ->
+        _this.showLocalPointsInfo(data)
+        for point, num in data
+          _this.addMarker({
+            lat:   point.latitude,
+            lng:   point.longitude,
+            title: point.pointName
+          })
+    })
+
+  # 指定したidのdivにGoogleMapsを生成
+  createGmap:() ->
+    latlng = new google.maps.LatLng(@lat,@lng)
+    opts   = {
+      zoom:      @level,
+      center:    latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    window.gmap = new google.maps.Map($(@canvasId)[0], opts)
+
+  # mapの中央にマーカーを配置
+  addCenterMarker:() ->
+    center    = window.gmap.getCenter()
+    imageUrl  = 'http://www.google.com/mapfiles/gadget/arrowSmall80.png'
+    image     = new google.maps.MarkerImage imageUrl
+    @addMarker({
+      lat:   center.lat(),
+      lng:   center.lng(),
+      title: 'center',
+      icon:  image,
+    })
+
+  # GoogleMapsにマーカーを配置
+  addMarker:(opt) ->
+    latlng = new google.maps.LatLng(opt.lat, opt.lng)
+    marker = new google.maps.Marker({
+      position: latlng,
+      title:    opt.title,
+      icon:     opt.icon,
+    })
+    marker.setMap(window.gmap)
+
+  # 右側スペースにpointの情報を表示
+  showLocalPointsInfo:(data, opt={}) ->
+    for point, num in data
+      toggle = $("<a>")
+        .attr("class", "accordion-toggle")
+        .attr("data-toggle", "collapse")
+        .attr("data-parent", "#local_points_info")
+        .attr("href", "#collapseOne")
+        .append(point.point_name)
+      heading = $("<div>")
+        .attr("class", "accordion-heading")
+        .append(toggle)
+
+      body_inner = $("<div>")
+        .attr("class", "accordion-inner")
+        .append(point.address)
+      body = $("<div>")
+        .attr("class", "accordion-body collapse")
+        .attr("id", "collapseOne")
+        .append(body_inner)
+
+      group = $("<div>")
+        .attr("class", "accordion-group")
+        .append(heading)
+        .append(body)
+        $("#local_points_info").append(group)

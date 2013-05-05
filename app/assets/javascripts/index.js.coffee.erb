@@ -1,84 +1,9 @@
-# ロード完了後、GoogleMaps生成とマーカー配置
 $ ->
-  lat = 35.6589960
-  lng = 139.70380
-  create_gmap({
-    id:  '#map_canvas',
-    lat: lat,
-    lng: lng,
+  myMaps = new MyMaps({
+    canvasId: '#map_canvas',
+    lat:      35.6589960,
+    lng:      139.70380,
+    range:    0.01,
   })
-  fetch_points({
-    nlat: lat - 0.01,
-    slat: lat + 0.01,
-    nlng: lng - 0.01,
-    slng: lng + 0.01,
-  })
-
-# 指定した範囲の緯度経度からpoint情報取得を試みる
-fetch_points=(latlng) ->
-  $.ajax({
-    type:     "GET",
-    dataType: "json",
-    url:      "/api/points",
-    data:     latlng,
-    success: (data, status, jqXHR) ->
-      show_local_points_info(data)
-      for point, num in data
-        add_marker({
-          lat:   point.latitude,
-          lng:   point.longitude,
-          title: point.point_name
-        })
-  })
-
-# 指定したidのdivにGoogleMapsを生成
-create_gmap=(opt) ->
-  latlng = new google.maps.LatLng(opt.lat,opt.lng)
-  opts   = {
-    zoom:      15,
-    center:    latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  }
-  window.gmap = new google.maps.Map($(opt.id)[0], opts)
-
-# GoogleMapsにマーカーを配置
-add_marker=(opt) ->
-  latlng = new google.maps.LatLng(opt.lat, opt.lng)
-  marker = new google.maps.Marker({
-    position: latlng,
-    title:    opt.title
-  })
-  marker.setMap(window.gmap)
-
-# 右側スペースにpointの情報を表示
-show_local_points_info=(data, opt={}) ->
-  for point, num in data
-    toggle = $("<a>")
-      .attr("class", "accordion-toggle")
-      .attr("data-toggle", "collapse")
-      .attr("data-parent", "#local_points_info")
-      .attr("href", "#collapseOne")
-      .append(point.point_name)
-    heading = $("<div>")
-      .attr("class", "accordion-heading")
-      .append(toggle)
-
-    body_inner = $("<div>")
-      .attr("class", "accordion-inner")
-      .append(point.address)
-    body = $("<div>")
-      .attr("class", "accordion-body collapse")
-      .attr("id", "collapseOne")
-      .append(body_inner)
-
-    group = $("<div>")
-      .attr("class", "accordion-group")
-      .append(heading)
-      .append(body)
-    $("#local_points_info").append(group)
-
-alert_dump=(obj) ->
-  acc = []
-  $.each obj, (idx, val)->
-    acc.push(idx + ':' + val)
-  alert JSON.stringify(acc)
+  myMaps.createGmap()
+  myMaps.fetchPointsAround()
