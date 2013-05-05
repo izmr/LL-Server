@@ -1,0 +1,50 @@
+<div class="row-fluid">
+  <%= bootstrap_flash %>
+  <div class="span6">
+    <%= google_map_tag id: "map_canvas", width: 550, height: 550 %>
+  </div>
+  <div class="span6">
+    <p id="notice"><%= notice %></p>
+    <table class="table">
+      <tr>
+        <th>店名</th>
+        <td><%= @local_point.point_name %></td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td><%= @local_point.address %></td>
+      </tr>
+      <tr>
+        <th>WebサイトURL</th>
+        <td><%= @local_point.site_url %></td>
+      </tr>
+      <tr>
+        <th>簡単な説明</th>
+        <td><%= @local_point.description %></td>
+      </tr>
+    </table>
+  </div>
+</div><!--/row-->
+
+<% content_for :javascript do %>
+<script type="text/javascript">
+  $(function(){
+    var canvasId = '#map_canvas';
+    var myMaps = new MyMaps({
+      canvasId: canvasId,
+      lat:      <%= @local_point.latitude ||  35.68172719326397 %>,
+      lng:      <%= @local_point.longitude || 139.76800135498047 %>,
+      level:    16,
+      range:    0.01,
+      form:     {
+        latf:    '#local_point_latitude',
+        lngf:    '#local_point_longitude',
+        address: '#local_point_address',
+      }
+    });
+    myMaps.createGmap();
+
+    myMaps.addCenterMarker();
+  });
+</script>
+<% end %>
