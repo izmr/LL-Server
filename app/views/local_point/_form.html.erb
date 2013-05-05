@@ -1,0 +1,48 @@
+<%= form_tag '/local_point', :method => :post, :class => 'form-horizontal' do %>
+  <fieldset>
+    <legend>セッションスポットを紹介する</legend>
+    <div class="control-group">
+      <label class="control-label" for="point_name">店名</label>
+      <div class="controls">
+        <input type="text" class="input-large" name="point_name" id="point_name" placeholder="ライブスポットHoge" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="address">住所</label>
+      <div class="controls">
+        <input type="text" class="input-large" name="address" id="address" placeholder="東京都○○区" />
+        <button type="button" class="btn" id="update_center_by_address">住所から位置取得</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="latitude">緯度</label>
+      <div class="controls">
+        <input type="text" class="input-medium" name="latitude" id="latitude" disabled />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="longitude">経度</label>
+      <div class="controls">
+        <input type="text" class="input-medium" name="longitude" id="longitude" disabled />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="site_url">WebサイトURL(任意)</label>
+      <div class="controls">
+        <input type="text" class="input-large" name="site_url" id="site_url" placeholder="http://" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="description">簡単な説明(任意)</label>
+      <div class="controls">
+        <textarea rows="5" class="input-xlarge" name="description" id="description">
+        </textarea>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <button type="submit" class="btn">追加</button>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

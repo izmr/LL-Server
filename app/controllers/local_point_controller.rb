@@ -1,20 +1,22 @@
 class LocalPointController < ApplicationController
-  # 一覧
+  # GET /local_point
   def index
   end
 
-  # 新規登録画面
+  # GET /local_point/new
   def new
     @local_point = LocalPoint.new
-    render :layout => 'with_google_maps'
   end
 
-  # POSTされた位置情報をsaveする
+  # POST /local_point
   def create
   end
 
+  # GET /local_point/1
   def show
+    @local_point = LocalPoint.find(@params[:id])
   end
+
   def edit
   end
   def update
