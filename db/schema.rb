@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130415090606) do
+ActiveRecord::Schema.define(:version => 20130505131055) do
 
   create_table "local_points", :force => true do |t|
     t.string   "point_name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130415090606) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "site_url"
   end
 
 end
