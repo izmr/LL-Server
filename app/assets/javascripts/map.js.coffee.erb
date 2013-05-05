@@ -97,26 +97,39 @@ class @MyMaps
   # 右側スペースにpointの情報を表示
   showLocalPointsInfo:(data, opt={}) ->
     for point, num in data
-      toggle = $("<a>")
-        .attr("class", "accordion-toggle")
-        .attr("data-toggle", "collapse")
-        .attr("data-parent", "#local_points_info")
-        .attr("href", "#collapseOne")
-        .append(point.point_name)
-      heading = $("<div>")
-        .attr("class", "accordion-heading")
-        .append(toggle)
+      link = $('<a>')
+      link.attr "href", "/local_points/" + point.id
+      link.append point.point_name
 
-      body_inner = $("<div>")
-        .attr("class", "accordion-inner")
-        .append(point.address)
-      body = $("<div>")
-        .attr("class", "accordion-body collapse")
-        .attr("id", "collapseOne")
-        .append(body_inner)
+      div = $('<div>')
+      div.attr "class", "well"
+      div.append link
+      div.append "<br>"
+      div.append point.address
+      $("#spot_info").append div
 
-      group = $("<div>")
-        .attr("class", "accordion-group")
-        .append(heading)
-        .append(body)
-        $("#local_points_info").append(group)
+#  showLocalPointsInfo:(data, opt={}) ->
+#    for point, num in data
+#      toggle = $("<a>")
+#        .attr("class", "accordion-toggle")
+#        .attr("data-toggle", "collapse")
+#        .attr("data-parent", "#local_points_info")
+#        .attr("href", "#collapseOne")
+#        .append(point.point_name)
+#      heading = $("<div>")
+#        .attr("class", "accordion-heading")
+#        .append(toggle)
+#
+#      body_inner = $("<div>")
+#        .attr("class", "accordion-inner")
+#        .append(point.address)
+#      body = $("<div>")
+#        .attr("class", "accordion-body collapse")
+#        .attr("id", "collapseOne")
+#        .append(body_inner)
+#
+#      group = $("<div>")
+#        .attr("class", "accordion-group")
+#        .append(heading)
+#        .append(body)
+#        $("#local_points_info").append(group)
