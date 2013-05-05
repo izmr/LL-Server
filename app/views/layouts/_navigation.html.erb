@@ -13,6 +13,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Location<i class=" icon-search"></i></a>
             <ul class="dropdown-menu">
               <li><%= link_to "Tokyo", url_for(:controller => 'local_points', :action => 'index' ) %></li>
+              <li><%= link_to "Kyoto", url_for(:controller => 'local_points', :action => 'index', :params => { :location => 'kyoto' } ) %></li>
             </ul>
           </li>
           <li>

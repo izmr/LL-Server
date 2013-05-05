@@ -1,6 +1,17 @@
 class LocalPointsController < ApplicationController
   # GET /local_points
   def index
+    @location = params[:location]
+    @lat      = 35.641559718355225
+    @lng      = 139.75272349243164
+    @level    = 12
+    @range    = 0.1
+
+    if @location == 'kyoto'
+      @lat   = 34.98545130793503
+      @lng   = 135.7593648803711
+      @level = 13
+    end
   end
 
   # GET /local_point/new

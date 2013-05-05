@@ -13,5 +13,17 @@
 </div><!--/row-->
 
 <% content_for :javascript do %>
-<%= javascript_include_tag "index" %>
+<script type="text/javascript">
+  $(function() {
+    var myMaps = new MyMaps({
+      canvasId: '#map_canvas',
+      lat:      <%= @lat %>,
+      lng:      <%= @lng %>,
+      level:    <%= @level %>,
+      range:    <%= @range %>,
+    });
+    myMaps.createGmap();
+    myMaps.fetchPointsAround();
+  });
+</script>
 <% end %>
