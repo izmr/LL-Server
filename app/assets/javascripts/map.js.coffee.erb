@@ -8,11 +8,12 @@ class @MyMaps
     @range    = @params.range || 0.01
     @map      = {}
 
-  reloadCenter: () ->
+  # 移動時、中央のマーカーを再配置
+  reloadCenter: (form={}) ->
     _this = @
     google.maps.event.addListener @map, 'center_changed', ->
       _this.removeCenterMarker()
-      _this.addCenterMarker()
+      _this.addCenterMarker(form)
 
   # 一点の位置の周辺情報を取得
   fetchPointsAround:() ->
@@ -56,7 +57,7 @@ class @MyMaps
     @centerMarker.setMap(null)
 
   # mapの中央にマーカーを配置
-  addCenterMarker:() ->
+  addCenterMarker:(form={}) ->
     center    = window.gmap.getCenter()
     imageUrl  = 'http://www.google.com/mapfiles/gadget/arrowSmall80.png'
     image     = new google.maps.MarkerImage imageUrl
@@ -66,6 +67,10 @@ class @MyMaps
       title: 'center',
       icon:  image,
     })
+    if form.latf
+      $(form.latf).attr("value", center.lat())
+    if form.lngf
+      $(form.lngf).attr("value", center.lng())
     @centerMarker = marker
 
   # GoogleMapsにマーカーを配置

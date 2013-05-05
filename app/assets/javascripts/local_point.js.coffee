@@ -7,5 +7,10 @@ $ ->
     range:    0.01,
   })
   myMaps.createGmap()
-  myMaps.addCenterMarker()
-  myMaps.reloadCenter()
+  form = {
+    latf: '#latitude',
+    lngf: '#longitude',
+  }
+
+  myMaps.addCenterMarker(form)
+  myMaps.reloadCenter(form)
