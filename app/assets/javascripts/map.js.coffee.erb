@@ -8,6 +8,15 @@ class @MyMaps
     @range    = @params.range || 0.01
     @map      = {}
 
+  # 住所から緯度経度を取得 成功したらcenterを設定
+  updateCenterByAddress: (address) ->
+    _this = @
+    geocoder = new google.maps.Geocoder()
+    geocoder.geocode { address: address }, (result, status) ->
+      unless status == google.maps.GeocoderStatus.OK
+        return
+      _this.map.setCenter(result[0].geometry.location)
+
   # 移動時、中央のマーカーを再配置
   reloadCenter: (form={}) ->
     _this = @

@@ -12,5 +12,10 @@ $ ->
     lngf: '#longitude',
   }
 
+  # マップ中央のマーカーを中央に固定
   myMaps.addCenterMarker(form)
   myMaps.reloadCenter(form)
+
+  # ジオコーディング
+  $("#update_center").bind "click", ->
+    myMaps.updateCenterByAddress $("#address").val()
