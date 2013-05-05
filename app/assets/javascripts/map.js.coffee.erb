@@ -6,23 +6,26 @@ class @MyMaps
     @lng      = @params.lng
     @level    = @params.level || 15
     @range    = @params.range || 0.01
+    @form     = @params.form  || {}
     @map      = {}
 
   # 住所から緯度経度を取得 成功したらcenterを設定
   updateCenterByAddress: (address) ->
     _this = @
     geocoder = new google.maps.Geocoder()
-    geocoder.geocode { address: address }, (result, status) ->
+    geocoder.geocode { address: address }, (results, status) ->
       unless status == google.maps.GeocoderStatus.OK
         return
-      _this.map.setCenter(result[0].geometry.location)
+      result = results[0]
+      _this.map.setCenter(result.geometry.location)
+      $(_this.form.address).val(result.formatted_address)
 
   # 移動時、中央のマーカーを再配置
-  reloadCenter: (form={}) ->
+  reloadCenter: () ->
     _this = @
     google.maps.event.addListener @map, 'center_changed', ->
       _this.removeCenterMarker()
-      _this.addCenterMarker(form)
+      _this.addCenterMarker()
 
   # 一点の位置の周辺情報を取得
   fetchPointsAround:() ->
@@ -66,7 +69,7 @@ class @MyMaps
     @centerMarker.setMap(null)
 
   # mapの中央にマーカーを配置
-  addCenterMarker:(form={}) ->
+  addCenterMarker:() ->
     center    = window.gmap.getCenter()
     imageUrl  = 'http://www.google.com/mapfiles/gadget/arrowSmall80.png'
     image     = new google.maps.MarkerImage imageUrl
@@ -76,10 +79,8 @@ class @MyMaps
       title: 'center',
       icon:  image,
     })
-    if form.latf
-      $(form.latf).attr("value", center.lat())
-    if form.lngf
-      $(form.lngf).attr("value", center.lng())
+    $(@form.latf).attr("value", center.lat()) if @form.latf
+    $(@form.lngf).attr("value", center.lng()) if @form.lngf
     @centerMarker = marker
 
   # GoogleMapsにマーカーを配置
