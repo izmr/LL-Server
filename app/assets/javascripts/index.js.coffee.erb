@@ -22,6 +22,7 @@ fetch_points=(latlng) ->
     url:      "/api/points",
     data:     latlng,
     success: (data, status, jqXHR) ->
+      show_local_points_info(data)
       for point, num in data
         add_marker({
           lat:   point.latitude,
@@ -48,3 +49,36 @@ add_marker=(opt) ->
     title:    opt.title
   })
   marker.setMap(window.gmap)
+
+# 右側スペースにpointの情報を表示
+show_local_points_info=(data, opt={}) ->
+  for point, num in data
+    toggle = $("<a>")
+      .attr("class", "accordion-toggle")
+      .attr("data-toggle", "collapse")
+      .attr("data-parent", "#local_points_info")
+      .attr("href", "#collapseOne")
+      .append(point.point_name)
+    heading = $("<div>")
+      .attr("class", "accordion-heading")
+      .append(toggle)
+
+    body_inner = $("<div>")
+      .attr("class", "accordion-inner")
+      .append(point.address)
+    body = $("<div>")
+      .attr("class", "accordion-body collapse")
+      .attr("id", "collapseOne")
+      .append(body_inner)
+
+    group = $("<div>")
+      .attr("class", "accordion-group")
+      .append(heading)
+      .append(body)
+    $("#local_points_info").append(group)
+
+alert_dump=(obj) ->
+  acc = []
+  $.each obj, (idx, val)->
+    acc.push(idx + ':' + val)
+  alert JSON.stringify(acc)
