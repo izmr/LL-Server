@@ -6,11 +6,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="./">Local x Local</a>
+      <a class="brand" href="<%= url_for(:controller => 'index', :action => 'index') %>">Local x Local</a>
       <div class="container nav-collapse">
         <ul class="nav">
-          <li><%= link_to "住所から検索", "/search"  %></li>
-          <li><%= link_to "このサイトについて", "about"  %></li>
+          <li><%= link_to "地域情報の登録", url_for(:controller => 'local_point', :action => 'new')  %></li>
+          <li><%= link_to "このサイトについて", url_for(:controller => 'about', :action => 'index')  %></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
