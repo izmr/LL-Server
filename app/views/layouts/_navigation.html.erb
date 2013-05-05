@@ -8,8 +8,14 @@
       </a>
       <a class="brand" href="<%= url_for(:controller => 'index', :action => 'index') %>">JamSession*Local</a>
       <div class="container nav-collapse">
-        <ul class="nav">
-          <li><%= link_to "Add Spot", url_for(:controller => 'local_point', :action => 'new')  %></li>
+        <ul class="nav nav-pills">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Location<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Tokyo", url_for(:controller => 'index', :action => 'index' ) %></li>
+            </ul>
+          </li>
+          <li><%= link_to "Add SessionSpot", url_for(:controller => 'local_point', :action => 'new')  %></li>
           <li><%= link_to "About Me", url_for(:controller => 'about', :action => 'index')  %></li>
         </ul>
       </div><!--/.nav-collapse -->
