@@ -2,8 +2,9 @@ $ ->
   canvasId = '#map_canvas'
   myMaps = new MyMaps({
     canvasId: canvasId,
-    lat:      35.6589960,
-    lng:      139.70380,
+    lat:      35.68172719326397,
+    lng:      139.76800135498047,
+    level:    14,
     range:    0.01,
     form:     {
       latf:    '#latitude',
