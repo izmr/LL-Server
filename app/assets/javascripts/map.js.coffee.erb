@@ -48,9 +48,15 @@ class @MyMaps
         _this.showLocalPointsInfo(data)
         for point, num in data
           _this.addMarker({
-            lat:   point.latitude,
-            lng:   point.longitude,
-            title: point.pointName
+            id:          point.id,
+            title:       point.point_name,
+            point_name:  point.point_name,
+            address:     point.address,
+            description: point.description,
+            site_url:    point.site_url,
+            lat:         point.latitude,
+            lng:         point.longitude,
+            showInfo:    1,
           })
     })
 
@@ -91,7 +97,14 @@ class @MyMaps
       title:    opt.title,
       icon:     opt.icon,
     })
-    marker.setMap(window.gmap)
+    marker.setMap(@map)
+
+    if opt.showInfo
+      info = new google.maps.InfoWindow({
+        content: "<p>" + opt.point_name + "<br />" + opt.address + "</p>"
+      })
+      google.maps.event.addListener marker, 'click', ->
+        info.open(@map, marker)
     return marker
 
   # 右側スペースにpointの情報を表示
