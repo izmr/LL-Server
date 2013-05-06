@@ -36,6 +36,9 @@
   </div>
 </div><!--/row-->
 
+<% content_for :title do "#{@local_point.point_name} : JamSession*Local" end %>
+<% content_for :description do "ジャムセッション情報: #{@local_point.point_name} " + @local_point.genre.map{ |g| g.genre_name }.join(',') + " #{@local_point.description}" end %>
+<% content_for :keywords do "ジャムセッション,#{@local_point.point_name}," + @local_point.genre.map{ |g| g.genre_name }.join(", ")  end %>
 <% content_for :javascript do %>
 <script type="text/javascript">
   $(function(){

@@ -15,12 +15,12 @@ require 'pp'
   end
 end
 
-[ 'ジャズ(バップ系)',
-  'ジャズ(フリー・モード系)',
-  'ファンク',
-  'ロック',
+[ 'Jazz(Bebop)',
+  'Jazz(Free/Mode)',
+  'Funk',
+  'Rock',
   '民族音楽',
-  'ディキシーランドジャズ',
+  'Dixieland Jazz',
 ].each do |genre_name|
   genre = Genre.find_by_genre_name genre_name
   if genre
