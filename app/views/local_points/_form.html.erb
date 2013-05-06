@@ -16,7 +16,7 @@
         <button type="button" class="btn btn-info" id="update_center_by_address">地図を合わせる<i class="icon-globe"></i></button>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group <%= 'error' if @local_point.errors.has_key?(:genre) %>">
       <label class="control-label" for="genre">ジャンル(複数選択)*</label>
       <div class="controls">
         <% Genre.all.each do |g| %>
@@ -27,19 +27,19 @@
         <% end %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group <%= 'error' if @local_point.errors.has_key?(:site_url) %>">
       <label class="control-label" for="site_url">WebサイトURL*</label>
       <div class="controls">
-        <%= f.text_field :site_url, :placeholder => "http://www.hoge.com/top", :class => "input-medium" %>
+        <%= f.text_field :site_url, :placeholder => "http://www.hoge.com/top", :class => "input-large" %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group <%= 'error' if @local_point.errors.has_key?(:instruments) %>">
       <label class="control-label" for="instruments">備え付け楽器*</label>
       <div class="controls">
         <%= f.text_field :instruments, :placeholder => "ドラム, グランドピアノなど", :class => "input-large" %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group <%= 'error' if @local_point.errors.has_key?(:description) %>">
       <label class="control-label" for="description">簡単な説明*<br/>セッション日程、料金など</label>
       <div class="controls">
         <%= f.text_area :description, :rows => 5, :class => 'input-xlarge' %>
