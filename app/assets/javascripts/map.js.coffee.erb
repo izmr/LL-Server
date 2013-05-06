@@ -9,7 +9,9 @@ class @MyMaps
     @form           = @params.form  || {}
     @map            = {}
     @centerImageUrl = @params.centerImageUrl || 'http://www.google.com/mapfiles/gadget/arrowSmall80.png'
-    @markers        = []
+    @normalImage    = new google.maps.MarkerImage 'http://maps.google.co.jp/mapfiles/ms/icons/red-dot.png'
+    @forcusedImage  = new google.maps.MarkerImage 'http://maps.google.co.jp/mapfiles/ms/icons/green-dot.png'
+    @markers        = {}
 
   getBounds: ->
     @map.getBounds()
@@ -51,10 +53,9 @@ class @MyMaps
       data:     latlng,
       success: (data, status, jqXHR) ->
         _this.clearLocalPointsInfo()
-        _this.showLocalPointsInfo(data)
         _this.removeMarkers()
         for point, num in data
-          _this.markers.push _this.addMarker({
+          _this.markers[point.id] = _this.addMarker({
             id:          point.id,
             title:       point.point_name,
             point_name:  point.point_name,
@@ -63,14 +64,16 @@ class @MyMaps
             site_url:    point.site_url,
             lat:         point.latitude,
             lng:         point.longitude,
+            icon:        _this.normalImage
             showInfo:    1,
           })
+        _this.showLocalPointsInfo(data)
     })
 
   removeMarkers: ->
-    for m in @markers
+    for id, m of @markers
       m.setMap(null)
-    @markers = []
+    @markers = {}
 
   # 指定したidのdivにGoogleMapsを生成
   createGmap:() ->
@@ -130,9 +133,14 @@ class @MyMaps
       link.attr "href", "/local_points/" + point.id
       link.append point.point_name
 
-      div = $('<div>')
-      div.attr "class", "well well-small"
+      div = $('<div>', {
+        id:    @getInfoId(point.id),
+        class: "well well-small"
+      })
       div.append link
       div.append "<br>"
       div.append point.address
       $("#spot_info").append div
+
+  getInfoId: (id) ->
+    "_local_spot_info_" + id
