@@ -9,6 +9,7 @@ class @MyMaps
     @form           = @params.form  || {}
     @map            = {}
     @centerImageUrl = @params.centerImageUrl || 'http://www.google.com/mapfiles/gadget/arrowSmall80.png'
+    @markers        = []
 
   getBounds: ->
     @map.getBounds()
@@ -51,8 +52,9 @@ class @MyMaps
       success: (data, status, jqXHR) ->
         _this.clearLocalPointsInfo()
         _this.showLocalPointsInfo(data)
+        _this.removeMarkers()
         for point, num in data
-          _this.addMarker({
+          _this.markers.push _this.addMarker({
             id:          point.id,
             title:       point.point_name,
             point_name:  point.point_name,
@@ -64,6 +66,11 @@ class @MyMaps
             showInfo:    1,
           })
     })
+
+  removeMarkers: ->
+    for m in @markers
+      m.setMap(null)
+    @markers = []
 
   # 指定したidのdivにGoogleMapsを生成
   createGmap:() ->
