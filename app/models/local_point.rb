@@ -1,7 +1,7 @@
 class LocalPoint < ActiveRecord::Base
   acts_as_paranoid # 論理削除
 
-  attr_accessible :point_name, :address, :latitude, :longitude, :description, :site_url, :genres, :genre_ids
+  attr_accessible :point_name, :address, :latitude, :longitude, :description, :site_url, :genres, :genre_ids, :instruments
   has_many :genres_local_points
   has_many :genre, :through => :genres_local_points
   belongs_to :level

@@ -34,6 +34,12 @@
       </div>
     </div>
     <div class="control-group">
+      <label class="control-label" for="instruments">備え付け楽器(任意)</label>
+      <div class="controls">
+        <%= f.text_field :instruments, :placeholder => "ドラム, グランドピアノなど", :class => "input-large" %>
+      </div>
+    </div>
+    <div class="control-group">
       <label class="control-label" for="description">簡単な説明<br/>セッション日程、料金、ドラムやピアノの有無など</label>
       <div class="controls">
         <%= f.text_area :description, :rows => 5, :class => 'input-xlarge' %>

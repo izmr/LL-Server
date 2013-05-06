@@ -18,6 +18,10 @@
         <td><%= @local_point.genre.map{ |g| g.genre_name }.join(", ") %></td>
       </tr>
       <tr>
+        <th>備え付け楽器</th>
+        <td><%= @local_point.instruments %></td>
+      </tr>
+      <tr>
         <th>WebサイトURL</th>
         <td><%= @local_point.site_url %></td>
       </tr>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130506073120) do
+ActiveRecord::Schema.define(:version => 20130506102838) do
 
   create_table "genres", :force => true do |t|
     t.string   "genre_name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130506073120) do
     t.string   "site_url"
     t.integer  "level_id"
     t.datetime "deleted_at"
+    t.string   "instruments"
   end
 
 end
