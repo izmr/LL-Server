@@ -1,7 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  genre_name: MyString
+jazz:
+  genre_name: 'ジャズ'
 
-two:
-  genre_name: MyString
+free:
+  genre_name: 'フリージャズ'
+
+rock:
+  genre_name: 'ロック'

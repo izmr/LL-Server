@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  level_name: MyString
+welcome:
+  level_name: '誰でも歓迎'
 
-two:
-  level_name: MyString
+high_level:
+  level_name: '上級者向け'

@@ -11,19 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130506010653) do
-
-  create_table "genre_local_point", :force => true do |t|
-    t.integer  "local_point_id"
-    t.integer  "genre_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130506030813) do
 
   create_table "genres", :force => true do |t|
     t.string   "genre_name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "genres_local_points", :force => true do |t|
+    t.integer  "local_point_id"
+    t.integer  "genre_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "levels", :force => true do |t|

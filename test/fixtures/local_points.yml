@@ -4,8 +4,24 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one:
+  point_name:  'Point test 1'
+  address:     '東京都渋谷区渋谷1-2-3'
+  latitude:    35.68172719326397
+  longitude:   139.76800135498047
+  description: 'description 1'
+  site_url:    'http://www.hoge.com'
+  level:       welcome
+  genre:      [ jazz, free ]
+
 # column: value
 #
-two: {}
+two:
+  point_name:  'Point test 2'
+  address:     '東京都渋谷区渋谷2-3-4'
+  latitude:    35.69172719326301
+  longitude:   139.77800135498001
+  description: 'description 2'
+  level_id:    
+  site_url:    'http://www.hoge2.com'
 #  column: value

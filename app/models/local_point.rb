@@ -1,4 +1,6 @@
 class LocalPoint < ActiveRecord::Base
+  has_and_belongs_to_many :genre
+  belongs_to :level
   attr_accessible :point_name, :address, :latitude, :longitude, :description, :site_url
 
   # 指定した緯度経度の範囲内にあるpointを取得
