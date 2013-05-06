@@ -1,13 +1,17 @@
 # ロード完了後、GoogleMaps生成とマーカー配置
 class @MyMaps
   constructor: (@params) ->
-    @canvasId = @params.canvasId
-    @lat      = @params.lat
-    @lng      = @params.lng
-    @level    = @params.level || 12
-    @range    = @params.range || 0.01
-    @form     = @params.form  || {}
-    @map      = {}
+    @canvasId       = @params.canvasId
+    @lat            = @params.lat
+    @lng            = @params.lng
+    @level          = @params.level || 12
+    @range          = @params.range || 0.01
+    @form           = @params.form  || {}
+    @map            = {}
+    @centerImageUrl = @params.centerImageUrl || 'http://www.google.com/mapfiles/gadget/arrowSmall80.png'
+
+  getBounds: ->
+    @map.getBounds()
 
   # 住所から緯度経度を取得 成功したらcenterを設定
   updateCenterByAddress: (address) ->
@@ -30,10 +34,10 @@ class @MyMaps
   # 一点の位置の周辺情報を取得
   fetchPointsAround:() ->
     @fetchPoints({
-      nlat: @lat - @range,
-      slat: @lat + @range,
-      nlng: @lng - @range,
-      slng: @lng + @range,
+      sw_lat: @lat - @range,
+      ne_lat: @lat + @range,
+      sw_lng: @lng - @range,
+      ne_lng: @lng + @range,
     })
 
   # 指定した範囲の緯度経度からpoint情報取得を試みる
@@ -45,6 +49,7 @@ class @MyMaps
       url:      "/api/points",
       data:     latlng,
       success: (data, status, jqXHR) ->
+        _this.clearLocalPointsInfo()
         _this.showLocalPointsInfo(data)
         for point, num in data
           _this.addMarker({
@@ -77,7 +82,7 @@ class @MyMaps
   # mapの中央にマーカーを配置
   addCenterMarker:() ->
     center    = window.gmap.getCenter()
-    imageUrl  = 'http://www.google.com/mapfiles/gadget/arrowSmall80.png'
+    imageUrl  = @centerImageUrl
     image     = new google.maps.MarkerImage imageUrl
     marker = @addMarker({
       lat:   center.lat(),
@@ -107,6 +112,10 @@ class @MyMaps
         info.open(@map, marker)
     return marker
 
+  # 右側スペースを一旦クリア
+  clearLocalPointsInfo: ->
+    $("#spot_info div").remove()
+
   # 右側スペースにpointの情報を表示
   showLocalPointsInfo:(data, opt={}) ->
     for point, num in data
@@ -120,29 +129,3 @@ class @MyMaps
       div.append "<br>"
       div.append point.address
       $("#spot_info").append div
-
-#  showLocalPointsInfo:(data, opt={}) ->
-#    for point, num in data
-#      toggle = $("<a>")
-#        .attr("class", "accordion-toggle")
-#        .attr("data-toggle", "collapse")
-#        .attr("data-parent", "#local_points_info")
-#        .attr("href", "#collapseOne")
-#        .append(point.point_name)
-#      heading = $("<div>")
-#        .attr("class", "accordion-heading")
-#        .append(toggle)
-#
-#      body_inner = $("<div>")
-#        .attr("class", "accordion-inner")
-#        .append(point.address)
-#      body = $("<div>")
-#        .attr("class", "accordion-body collapse")
-#        .attr("id", "collapseOne")
-#        .append(body_inner)
-#
-#      group = $("<div>")
-#        .attr("class", "accordion-group")
-#        .append(heading)
-#        .append(body)
-#        $("#local_points_info").append(group)

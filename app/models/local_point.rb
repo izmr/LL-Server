@@ -17,16 +17,16 @@ class LocalPoint < ActiveRecord::Base
 
   # 指定した緯度経度の範囲内にあるpointを取得
   def self.find_by_latlng(params)
-    nlat = params[:nlat]
-    slat = params[:slat]
-    nlng = params[:nlng]
-    slng = params[:slng]
+    sw_lat = params[:sw_lat] # 南西緯度
+    ne_lat = params[:ne_lat] # 北東緯度
+    sw_lng = params[:sw_lng] # 南西経度
+    ne_lng = params[:ne_lng] # 北東経度
 
     return self.where(
       ["latitude  >= ?",
        "latitude  <= ?",
        "longitude >= ?",
        "longitude <= ?"].join(' and '),
-      nlat, slat, nlng, slng).order('updated_at desc').limit(100)
+      sw_lat, ne_lat, sw_lng, ne_lng).order('updated_at desc').limit(100)
   end
 end

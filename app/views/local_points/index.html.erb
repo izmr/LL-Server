@@ -22,7 +22,18 @@
       range:    <%= @range %>,
     });
     myMaps.createGmap();
-    myMaps.fetchPointsAround();
+
+    google.maps.event.addListener(myMaps.map, 'bounds_changed', function () {
+      var bounds = myMaps.getBounds();
+      var sw = bounds.getSouthWest();
+      var ne = bounds.getNorthEast();
+      myMaps.fetchPoints({
+        sw_lat: sw.lat(),
+        ne_lat: ne.lat(),
+        sw_lng: sw.lng(),
+        ne_lng: ne.lng(),
+      });
+    });
   });
 </script>
 <% end %>
