@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130505131055) do
+ActiveRecord::Schema.define(:version => 20130506010653) do
+
+  create_table "genre_local_point", :force => true do |t|
+    t.integer  "local_point_id"
+    t.integer  "genre_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "genres", :force => true do |t|
+    t.string   "genre_name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "levels", :force => true do |t|
+    t.string   "level_name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "local_points", :force => true do |t|
     t.string   "point_name"
@@ -22,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20130505131055) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "site_url"
+    t.integer  "level_id"
   end
 
 end
