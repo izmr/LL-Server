@@ -6,7 +6,7 @@
     <div class="control-group <%= 'error' if @local_point.errors.has_key?(:point_name) %>">
       <label class="control-label" for="point_name">店名</label>
       <div class="controls">
-        <%= f.text_field :point_name, :placeholder => "ライブスポットHoge", :class => "input-medium" %>
+        <%= f.text_field :point_name, :placeholder => "ライブスポットHoge", :class => "input-large" %>
       </div>
     </div>
     <div class="control-group <%= 'error' if @local_point.errors.has_key?(:address) %>">
@@ -42,11 +42,11 @@
     <div class="control-group <%= 'error' if @local_point.errors.has_key?(:instruments) %>">
       <label class="control-label" for="fee">料金*</label>
       <div class="controls">
-        <%= f.text_field :fee, :placeholder => "無料 1回1000円 ドリンク1杯 など", :class => "input-large" %>
+        <%= f.text_field :fee, :placeholder => "無料, 1回1000円 など", :class => "input-large" %>
       </div>
     </div>
     <div class="control-group <%= 'error' if @local_point.errors.has_key?(:description) %>">
-      <label class="control-label" for="description">簡単な説明*<br/>セッション日程、料金など</label>
+      <label class="control-label" for="description">簡単な説明*<br/>セッション日程など</label>
       <div class="controls">
         <%= f.text_area :description, :rows => 5, :class => 'input-xlarge' %>
       </div>
