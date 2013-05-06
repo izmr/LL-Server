@@ -14,6 +14,10 @@
         <td><%= @local_point.address %></td>
       </tr>
       <tr>
+        <th>ジャンル</th>
+        <td><%= @local_point.genre.map{ |g| g.genre_name }.join(", ") %></td>
+      </tr>
+      <tr>
         <th>WebサイトURL</th>
         <td><%= @local_point.site_url %></td>
       </tr>
