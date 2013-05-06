@@ -17,6 +17,15 @@
       </div>
     </div>
     <div class="control-group">
+      <label class="control-label" for="genre">ジャンル(複数選択)</label>
+      <div class="controls">
+        <% Genre.all.each do |g| %>
+          <%= f.check_box :genre_ids, { :checked => @local_point.genre.include?(g), :name => "genre[genre_ids][]" }, g.id, " " %>
+          <%= g.genre_name %>
+        <% end %>
+      </div>
+    </div>
+    <div class="control-group">
       <label class="control-label" for="site_url">WebサイトURL(任意)</label>
       <div class="controls">
         <%= f.text_field :site_url, :placeholder => "http://www.hoge.com/top", :class => "input-large" %>

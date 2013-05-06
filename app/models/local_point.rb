@@ -1,5 +1,6 @@
 class LocalPoint < ActiveRecord::Base
-  has_and_belongs_to_many :genre
+  has_many :genres_local_points
+  has_many :genre, :through => :genres_local_points
   belongs_to :level
   attr_accessible :point_name, :address, :latitude, :longitude, :description, :site_url
 

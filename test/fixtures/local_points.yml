@@ -12,7 +12,6 @@ one:
   description: 'description 1'
   site_url:    'http://www.hoge.com'
   level:       welcome
-  genre:      [ jazz, free ]
 
 # column: value
 #

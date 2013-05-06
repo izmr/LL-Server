@@ -1,4 +1,5 @@
 class Genre < ActiveRecord::Base
-  has_and_belongs_to_many :local_point
+  has_many :genres_local_points
+  has_many :local_point, :through => :genres_local_points
   attr_accessible :genre_name
 end
