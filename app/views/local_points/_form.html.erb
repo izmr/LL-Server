@@ -3,13 +3,13 @@
   <%= f.hidden_field :longitude %>
   <fieldset>
     <legend>セッションスポットを紹介する</legend>
-    <div class="control-group">
+    <div class="control-group <%= 'error' if @local_point.errors.has_key?(:point_name) %>">
       <label class="control-label" for="point_name">店名</label>
       <div class="controls">
         <%= f.text_field :point_name, :placeholder => "ライブスポットHoge", :class => "input-medium" %>
       </div>
     </div>
-    <div class="control-group">
+    <div class="control-group <%= 'error' if @local_point.errors.has_key?(:address) %>">
       <label class="control-label" for="address">住所</label>
       <div class="controls">
         <%= f.text_field :address, :placeholder => "東京都○○区×× 1-2-3 Hogeビル", :class => "input-large" %>
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="genre">ジャンル(複数選択)</label>
+      <label class="control-label" for="genre">ジャンル(複数選択)*</label>
       <div class="controls">
         <% Genre.all.each do |g| %>
           <label class="checkbox inline">
@@ -28,19 +28,19 @@
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="site_url">WebサイトURL(任意)</label>
+      <label class="control-label" for="site_url">WebサイトURL*</label>
       <div class="controls">
         <%= f.text_field :site_url, :placeholder => "http://www.hoge.com/top", :class => "input-medium" %>
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="instruments">備え付け楽器(任意)</label>
+      <label class="control-label" for="instruments">備え付け楽器*</label>
       <div class="controls">
         <%= f.text_field :instruments, :placeholder => "ドラム, グランドピアノなど", :class => "input-large" %>
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="description">簡単な説明<br/>セッション日程、料金、ドラムやピアノの有無など</label>
+      <label class="control-label" for="description">簡単な説明*<br/>セッション日程、料金など</label>
       <div class="controls">
         <%= f.text_area :description, :rows => 5, :class => 'input-xlarge' %>
       </div>

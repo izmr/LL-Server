@@ -1,6 +1,9 @@
 class LocalPoint < ActiveRecord::Base
   acts_as_paranoid # 論理削除
 
+  validates :point_name, :presence => true
+  validates :address, :presence => true
+
   attr_accessible :point_name, :address, :latitude, :longitude, :description, :site_url, :genres, :genre_ids, :instruments
   has_many :genres_local_points
   has_many :genre, :through => :genres_local_points
