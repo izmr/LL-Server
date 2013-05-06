@@ -1,0 +1,1 @@
+kill -HUP `cat $HOME/ll/tmp/pids/unicorn.pid`
