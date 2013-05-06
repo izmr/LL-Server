@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130506150737) do
+ActiveRecord::Schema.define(:version => 20130506185837) do
 
   create_table "genres", :force => true do |t|
     t.string   "genre_name"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130506150737) do
     t.integer  "level_id"
     t.datetime "deleted_at"
     t.string   "instruments"
+    t.string   "fee"
   end
 
   add_index "local_points", ["latitude", "longitude", "updated_at"], :name => "index_local_points_on_latitude_and_longitude_and_updated_at"

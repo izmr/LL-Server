@@ -10,7 +10,7 @@ class LocalPoint < ActiveRecord::Base
     :format => URI::regexp(%w(http https))
   }
 
-  attr_accessible :point_name, :address, :latitude, :longitude, :description, :site_url, :genres, :genre_ids, :instruments
+  attr_accessible :point_name, :address, :latitude, :longitude, :description, :site_url, :genres, :genre_ids, :instruments, :fee
   has_many :genres_local_points
   has_many :genre, :through => :genres_local_points
   belongs_to :level
