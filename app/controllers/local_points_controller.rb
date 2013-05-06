@@ -17,6 +17,7 @@ class LocalPointsController < ApplicationController
   # GET /local_point/new
   def new
     @local_point = LocalPoint.new
+    @new_mode    = true
   end
 
   # POST /local_point
@@ -40,6 +41,7 @@ class LocalPointsController < ApplicationController
   # GET /local_point/1/edit
   def edit
     @local_point = LocalPoint.find(params[:id])
+    @new_mode    = false
   end
 
   # PUT /local_point/1

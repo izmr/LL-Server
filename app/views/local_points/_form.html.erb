@@ -23,14 +23,24 @@
       </div>
     </div>
     <div class="control-group">
-      <label class="control-label" for="description">簡単な説明(任意)</label>
+      <label class="control-label" for="description">簡単なご説明(任意)</label>
       <div class="controls">
-        <%= f.text_area :description, :rows => 5, :class => 'input-xlarge' %>
+        <%= f.text_area :description, :rows => 5, :class => 'input-xlarge' do %>
+          TODO: placeholderが使えるか確認する
+          セッション日程：毎週金曜日２０時〜
+          主なジャンル：ジャズ、ファンク、ロック、フリー
+          参加料：無料/一回1,000円
+          主要楽器：ドラムス(あり/なし)  ピアノ(あり/なし)
+        <% end %>
       </div>
     </div>
     <div class="control-group">
       <div class="controls">
-        <button type="submit" class="btn btn-success">Update</button>
+        <% if @new_mode %>
+        <button type="submit" class="btn btn-success">追加</button>
+        <% else %>
+        <button type="submit" class="btn btn-success">更新</button>
+        <% end %>
       </div>
     </div>
   </fieldset>
