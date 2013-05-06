@@ -23,7 +23,7 @@
     });
     myMaps.createGmap();
 
-    google.maps.event.addListener(myMaps.map, 'bounds_changed', function () {
+    google.maps.event.addListener(myMaps.map, 'idle', function () {
       var bounds = myMaps.getBounds();
       var sw = bounds.getSouthWest();
       var ne = bounds.getNorthEast();
