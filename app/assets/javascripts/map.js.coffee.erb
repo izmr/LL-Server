@@ -143,11 +143,5 @@ class @MyMaps
       div.append point.address
       $("#spot_info").append div
 
-      if marker = @markers[point.id]
-        div.mouseover { point: point, marker: marker }, (e)->
-          e.data.marker.setIcon _this.forcusedImage
-        div.mouseout  { point: point, marker: marker }, (e)->
-          e.data.marker.setIcon _this.normalImage
-
   getInfoId: (id) ->
     "_local_spot_info_" + id

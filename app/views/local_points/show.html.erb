@@ -1,14 +1,11 @@
 <div class="row-fluid">
   <%= bootstrap_flash %>
   <div class="span6">
-    <%= google_map_tag id: "map_canvas", width: 550, height: 550 %>
+    <h2><%= @local_point.point_name %></h2>
   </div>
   <div class="span6">
+    <%= google_map_tag id: "map_canvas", width: 400, height: 400 %>
     <table class="table">
-      <tr>
-        <th>店名</th>
-        <td><%= @local_point.point_name %></td>
-      </tr>
       <tr>
         <th>住所</th>
         <td><%= @local_point.address %></td>
